@@ -96,25 +96,27 @@ class _ChooserPageState extends State<ChooserPage> {
             ],
           ),
           ElevatedButton(
-            onPressed: () {
-              HapticFeedback.vibrate();
-              Navigator.of(context).pushReplacement(CupertinoPageRoute(
-                builder: (context) => GamePage(
-                  playerX: isXSelected ? PlayerType.human : PlayerType.computer,
-                  playerO:
-                      !isXSelected ? PlayerType.human : PlayerType.computer,
-                  difficulty:
-                      isEasyMode ? GameDifficulty.easy : GameDifficulty.hard,
-                ),
-              ));
-            },
+            onPressed: () => goToNextPage(context),
             child: const Text('Continue'),
             style: ButtonStyle(
-                padding: MaterialStateProperty.all(
-                    const EdgeInsets.fromLTRB(32, 8, 32, 8))),
+              padding: MaterialStateProperty.all(
+                const EdgeInsets.fromLTRB(32, 8, 32, 8),
+              ),
+            ),
           ),
         ],
       ),
     );
+  }
+
+  void goToNextPage(BuildContext context) {
+    HapticFeedback.vibrate();
+    Navigator.of(context).pushReplacement(CupertinoPageRoute(
+      builder: (context) => GamePage(
+        playerX: isXSelected ? PlayerType.human : PlayerType.computer,
+        playerO: !isXSelected ? PlayerType.human : PlayerType.computer,
+        difficulty: isEasyMode ? GameDifficulty.easy : GameDifficulty.hard,
+      ),
+    ));
   }
 }

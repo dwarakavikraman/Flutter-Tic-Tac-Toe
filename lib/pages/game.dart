@@ -54,30 +54,11 @@ class _GamePageState extends State<GamePage> {
           actions: [
             IconButton(
               icon: const Icon(Icons.refresh),
-              onPressed: () {
-                resetGame();
-              },
+              onPressed: resetGame,
             ),
             IconButton(
               icon: const Icon(Icons.info),
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: const Text('Tic Tac Toe'),
-                    content:
-                        const Text('This is a simple game of tic tac toe.\n\n'
-                            'The game is played on a 3x3 grid.\n\n'
-                            'The first player to get three in a row wins.'),
-                    actions: [
-                      TextButton(
-                        child: const Text('OK'),
-                        onPressed: () => Navigator.of(context).pop(),
-                      ),
-                    ],
-                  ),
-                );
-              },
+              onPressed: () => showHelpDialog(context),
             ),
           ],
         ),
@@ -103,6 +84,24 @@ class _GamePageState extends State<GamePage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  void showHelpDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Tic Tac Toe'),
+        content: const Text('This is a simple game of tic tac toe.\n\n'
+            'The game is played on a 3x3 grid.\n\n'
+            'The first player to get three in a row wins.'),
+        actions: [
+          TextButton(
+            child: const Text('OK'),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ],
       ),
     );
   }

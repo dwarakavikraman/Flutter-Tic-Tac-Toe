@@ -13,24 +13,7 @@ class StartPage extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.info),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                  title: const Text('Tic Tac Toe'),
-                  content:
-                      const Text('This is a simple game of tic tac toe.\n\n'
-                          'The game is played on a 3x3 grid.\n\n'
-                          'The first player to get three in a row wins.'),
-                  actions: [
-                    TextButton(
-                      child: const Text('OK'),
-                      onPressed: () => Navigator.of(context).pop(),
-                    ),
-                  ],
-                ),
-              );
-            },
+            onPressed: () => showHelpDialog(context),
           ),
         ],
       ),
@@ -52,19 +35,44 @@ class StartPage extends StatelessWidget {
           Expanded(
             child: Center(
               child: ElevatedButton(
-                onPressed: () {
-                  HapticFeedback.heavyImpact();
-                  Navigator.of(context).push(CupertinoPageRoute(
-                      builder: (context) => const ChooserPage()));
-                },
+                onPressed: () => goToNextPage(context),
                 child: const Text('Start Game'),
                 style: ButtonStyle(
-                    padding: MaterialStateProperty.all(
-                        const EdgeInsets.fromLTRB(32, 8, 32, 8))),
+                  padding: MaterialStateProperty.all(
+                    const EdgeInsets.fromLTRB(32, 8, 32, 8),
+                  ),
+                ),
               ),
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  showHelpDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Tic Tac Toe'),
+        content: const Text('This is a simple game of tic tac toe.\n\n'
+            'The game is played on a 3x3 grid.\n\n'
+            'The first player to get three in a row wins.'),
+        actions: [
+          TextButton(
+            child: const Text('OK'),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void goToNextPage(BuildContext context) {
+    HapticFeedback.heavyImpact();
+    Navigator.of(context).push(
+      CupertinoPageRoute(
+        builder: (context) => const ChooserPage(),
       ),
     );
   }

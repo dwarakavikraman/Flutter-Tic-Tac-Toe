@@ -36,6 +36,7 @@ class Helper {
     return move;
   }
 
+  // A recursive function that calculates the best possible move for the player
   static int minimax(List<String> currentBoard, bool isMaximise, String player,
       String opponent) {
     String? result = checkWinner(currentBoard);

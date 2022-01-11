@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/constants/theme.dart';
 
-// A selectable card that displays a child widget.
 class SelectableCard extends StatelessWidget {
   const SelectableCard(
       {Key? key,
