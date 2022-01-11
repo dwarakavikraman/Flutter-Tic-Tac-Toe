@@ -177,20 +177,30 @@ class _GamePageState extends State<GamePage> {
     return isXTurn ? 'O' : 'X';
   }
 
-  makeMove(int index) {
+  vibrateLongDuration() async {
+    HapticFeedback.vibrate();
+    await Future.delayed(const Duration(milliseconds: 100));
+    HapticFeedback.vibrate();
+    await Future.delayed(const Duration(milliseconds: 100));
+    HapticFeedback.vibrate();
+  }
+
+  makeMove(int index) async {
     setState(() {
       board[index] = isXTurn ? 'X' : 'O';
       isXTurn = !isXTurn;
       totalMoves++;
     });
-    HapticFeedback.vibrate();
+    HapticFeedback.selectionClick();
 
     if (isGameOver()) {
+      vibrateLongDuration();
       setState(() {
         gameState = GameState.done;
       });
     } else if ((isXTurn && widget.playerX == PlayerType.computer) ||
         (!isXTurn && widget.playerO == PlayerType.computer)) {
+      await Future.delayed(Duration(milliseconds: 250));
       computerMove();
     }
   }

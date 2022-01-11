@@ -41,57 +41,67 @@ class _ChooserPageState extends State<ChooserPage> {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const Text(
-            'Choose your side',
-            style: TextStyle(fontSize: 20),
-          ),
-          GridView.count(
-            crossAxisCount: 2,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 42,
-            padding: const EdgeInsets.all(10),
+          Column(
             children: [
-              SelectableCard(
-                child: const X(),
-                onTap: () => setSide(true),
-                isSelected: isXSelected,
+              const Text(
+                'Choose your side',
+                style: TextStyle(fontSize: 20),
               ),
-              SelectableCard(
-                child: const O(),
-                onTap: () => setSide(false),
-                isSelected: !isXSelected,
+              const SizedBox(height: 16),
+              GridView.count(
+                crossAxisCount: 2,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 42,
+                padding: const EdgeInsets.all(10),
+                children: [
+                  SelectableCard(
+                    child: const X(),
+                    onTap: () => setSide(true),
+                    isSelected: isXSelected,
+                  ),
+                  SelectableCard(
+                    child: const O(),
+                    onTap: () => setSide(false),
+                    isSelected: !isXSelected,
+                  ),
+                ],
               ),
             ],
           ),
-          const Text(
-            'Choose the difficulty',
-            style: TextStyle(fontSize: 20),
-          ),
-          GridView.count(
-            crossAxisCount: 2,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 42,
-            padding: const EdgeInsets.all(10),
+          Column(
             children: [
-              SelectableCard(
-                child: const Text(
-                  'Easy',
-                  style: TextStyle(fontSize: 20),
-                ),
-                onTap: () => setMode(true),
-                isSelected: isEasyMode,
+              const Text(
+                'Choose the difficulty',
+                style: TextStyle(fontSize: 20),
               ),
-              SelectableCard(
-                child: const Text(
-                  'Hard',
-                  style: TextStyle(fontSize: 20),
-                ),
-                onTap: () => setMode(false),
-                isSelected: !isEasyMode,
+              const SizedBox(height: 16),
+              GridView.count(
+                crossAxisCount: 2,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 42,
+                padding: const EdgeInsets.all(10),
+                children: [
+                  SelectableCard(
+                    child: const Text(
+                      'Easy',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    onTap: () => setMode(true),
+                    isSelected: isEasyMode,
+                  ),
+                  SelectableCard(
+                    child: const Text(
+                      'Hard',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    onTap: () => setMode(false),
+                    isSelected: !isEasyMode,
+                  ),
+                ],
               ),
             ],
           ),
