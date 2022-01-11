@@ -78,12 +78,18 @@ class _ChooserPageState extends State<ChooserPage> {
             padding: const EdgeInsets.all(10),
             children: [
               SelectableCard(
-                child: const Text('Easy Mode'),
+                child: const Text(
+                  'Easy',
+                  style: TextStyle(fontSize: 20),
+                ),
                 onTap: () => setMode(true),
                 isSelected: isEasyMode,
               ),
               SelectableCard(
-                child: const Text('Hard Mode'),
+                child: const Text(
+                  'Hard',
+                  style: TextStyle(fontSize: 20),
+                ),
                 onTap: () => setMode(false),
                 isSelected: !isEasyMode,
               ),

@@ -7,24 +7,109 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:tic_tac_toe/constants/theme.dart';
 
-import 'package:tic_tac_toe/main.dart';
+import 'package:tic_tac_toe/pages/game.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  final TestWidgetsFlutterBinding binding =
+      TestWidgetsFlutterBinding.ensureInitialized()
+          as TestWidgetsFlutterBinding;
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
+  testWidgets('Manual Testing For O Wins', (WidgetTester tester) async {
+    binding.window.physicalSizeTestValue = Size(400, 800);
+    binding.window.devicePixelRatioTestValue = 1.0;
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(MaterialApp(
+      theme: MyTheme.theme,
+      home: GamePage(
+          playerX: PlayerType.human,
+          playerO: PlayerType.human,
+          difficulty: GameDifficulty.hard),
+    ));
+
+    expect(find.text(''), findsOneWidget);
+
+    expect(find.text('0'), findsNWidgets(2));
     expect(find.text('1'), findsNothing);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    await tester.tap(find.byKey(const Key('grid-item-0')));
+    await tester.pumpAndSettle();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
+    await tester.tap(find.byKey(const Key('grid-item-4')));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(const Key('grid-item-1')));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(const Key('grid-item-2')));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(const Key('grid-item-3')));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(const Key('grid-item-6')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('O Wins!'), findsOneWidget);
+
+    await tester.tap(find.byKey(const Key('grid-item-6')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('0'), findsOneWidget);
     expect(find.text('1'), findsOneWidget);
+  });
+
+  testWidgets('Manual Test for Draw', (WidgetTester tester) async {
+    binding.window.physicalSizeTestValue = Size(400, 800);
+    binding.window.devicePixelRatioTestValue = 1.0;
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(MaterialApp(
+      theme: MyTheme.theme,
+      home: GamePage(
+          playerX: PlayerType.human,
+          playerO: PlayerType.human,
+          difficulty: GameDifficulty.hard),
+    ));
+
+    expect(find.text(''), findsOneWidget);
+
+    expect(find.text('0'), findsNWidgets(2));
+    expect(find.text('1'), findsNothing);
+
+    await tester.tap(find.byKey(const Key('grid-item-0')));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(const Key('grid-item-4')));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(const Key('grid-item-8')));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(const Key('grid-item-1')));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(const Key('grid-item-7')));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(const Key('grid-item-6')));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(const Key('grid-item-2')));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(const Key('grid-item-5')));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(const Key('grid-item-3')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Draw!'), findsOneWidget);
+
+    await tester.tap(find.byKey(const Key('grid-item-6')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('0'), findsNWidgets(2));
+    expect(find.text('1'), findsNothing);
   });
 }

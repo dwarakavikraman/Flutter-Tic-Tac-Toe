@@ -83,7 +83,6 @@ class _GamePageState extends State<GamePage> {
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             Flexible(
               flex: 2,
@@ -124,6 +123,7 @@ class _GamePageState extends State<GamePage> {
 
   Widget _buildGridItem(int index) {
     return GestureDetector(
+      key: Key('grid-item-$index'),
       onTap: gameState == GameState.inProgress
           ? () {
               if (board[index] == '') {
@@ -165,6 +165,7 @@ class _GamePageState extends State<GamePage> {
     }
     return Text(
       message,
+      key: const Key('game-state'),
       style: Theme.of(context).textTheme.headline6,
     );
   }
